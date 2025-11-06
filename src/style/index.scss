@@ -1,21 +1,29 @@
-// 测试用的 iconfont，可生效
-// @import './iconfont.css';
-
-.test {
-  // 可以通过 @apply 多个样式封装整体样式
-  @apply mt-4 ml-4;
-
-  padding-top: 4px;
-  color: red;
-}
-
 :root,
 page {
-  // 修改按主题色
-  // --wot-color-theme: #37c2bc;
+  font-family:
+    PingFang SC,
+    Microsoft YaHei,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
+  background-color: #fefeff;
+  --app-primary-color: #4299e1;
+  --app-background-color: white;
+  --wot-color-theme: var(--app-primary-color);
+}
 
-  // 修改按钮背景色
-  // --wot-button-primary-bg-color: green;
+::-webkit-scrollbar {
+  display: none;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+.wd-tabbar__placeholder {
+  box-sizing: content-box;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 64rpx) !important;
 }
 
 /*

@@ -3,8 +3,9 @@
 declare global {
   interface IResData<T> {
     code: number
-    msg: string
     data: T
+    message: string
+    success: boolean
   }
 
   // uni.uploadFile文件上传参数

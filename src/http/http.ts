@@ -12,13 +12,11 @@ let taskQueue: (() => void)[] = [] // 刷新 token 请求队列
 
 export function http<T>(options: CustomRequestOptions) {
   // 1. 返回 Promise 对象
-  return new Promise<T>((resolve, reject) => {
+  return new Promise<IResData<T>>((resolve, reject) => {
     uni.request({
       ...options,
       dataType: 'json',
-      // #ifndef MP-WEIXIN
       responseType: 'json',
-      // #endif
       // 响应成功
       success: async (res) => {
         const responseData = res.data as IResponse<T>
@@ -101,7 +99,7 @@ export function http<T>(options: CustomRequestOptions) {
               title: responseData.msg || responseData.message || '请求错误',
             })
           }
-          return resolve(responseData.data)
+          return resolve(responseData.data as IResData<T>)
         }
 
         // 处理其他错误
@@ -176,10 +174,9 @@ export function httpPut<T>(url: string, data?: Record<string, any>, query?: Reco
 /**
  * DELETE 请求（无请求体，仅 query）
  */
-export function httpDelete<T>(url: string, query?: Record<string, any>, header?: Record<string, any>, options?: Partial<CustomRequestOptions>) {
+export function httpDelete<T>(url: string, query?: number, header?: Record<string, any>, options?: Partial<CustomRequestOptions>) {
   return http<T>({
-    url,
-    query,
+    url: `${url}/${query}`,
     method: 'DELETE',
     header,
     ...options,
@@ -191,9 +188,3 @@ http.get = httpGet
 http.post = httpPost
 http.put = httpPut
 http.delete = httpDelete
-
-// 支持与 alovaJS 类似的API调用
-http.Get = httpGet
-http.Post = httpPost
-http.Put = httpPut
-http.Delete = httpDelete
