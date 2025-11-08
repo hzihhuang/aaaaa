@@ -10,7 +10,6 @@ import { getAllPages, getLastPage, HOME_PAGE, parseUrlToObj } from '@/utils/inde
 import { toLoginPage } from '@/utils/toLoginPage'
 import { EXCLUDE_LOGIN_PATH_LIST, isNeedLoginMode, LOGIN_PAGE, LOGIN_PAGE_ENABLE_IN_MP, NOT_FOUND_PAGE } from './config'
 
-export const FG_LOG_ENABLE = false
 export function judgeIsExcludePath(path: string) {
   const isDev = import.meta.env.DEV
   if (!isDev) {
@@ -29,12 +28,7 @@ export const navigateToInterceptor = {
     }
     let { path, query: _query } = parseUrlToObj(url)
 
-    FG_LOG_ENABLE && console.log('\n\n路由拦截器:-------------------------------------')
-    FG_LOG_ENABLE && console.log('路由拦截器 1: url->', url, ', query ->', query)
     const myQuery = { ..._query, ...query }
-    // /pages/route-interceptor/index?name=feige&age=30
-    FG_LOG_ENABLE && console.log('路由拦截器 2: path->', path, ', _query ->', _query)
-    FG_LOG_ENABLE && console.log('路由拦截器 3: myQuery ->', myQuery)
 
     // 处理相对路径
     if (!path.startsWith('/')) {
@@ -60,7 +54,6 @@ export const navigateToInterceptor = {
     }
 
     const tokenStore = useTokenStore()
-    FG_LOG_ENABLE && console.log('tokenStore.hasLogin:', tokenStore.hasLogin)
 
     // 不管黑白名单，登录了就直接去吧（但是当前不能是登录页）
     if (tokenStore.hasLogin) {
@@ -97,7 +90,6 @@ export const navigateToInterceptor = {
         if (path === LOGIN_PAGE) {
           return true // 明确表示允许路由继续执行
         }
-        FG_LOG_ENABLE && console.log('1 isNeedLogin(白名单策略) url:', fullPath)
         toLoginPage({ queryString: redirectQuery })
         return false // 明确表示阻止原路由继续执行
       }
@@ -108,7 +100,6 @@ export const navigateToInterceptor = {
     else {
       // 不需要登录里面的 EXCLUDE_LOGIN_PATH_LIST 表示黑名单，需要重定向到登录页
       if (judgeIsExcludePath(path)) {
-        FG_LOG_ENABLE && console.log('2 isNeedLogin(黑名单策略) url:', fullPath)
         toLoginPage({ queryString: redirectQuery })
         return false // 修改为false，阻止原路由继续执行
       }

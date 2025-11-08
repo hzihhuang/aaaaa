@@ -22,7 +22,7 @@ export function getCode() {
  * @param loginForm 登录表单
  */
 export function login(loginForm: ILoginForm) {
-  return http.post<IAuthLoginRes>('/auth/login', loginForm)
+  return http.post<IAuthLoginRes>('/user/login', loginForm)
 }
 
 /**
@@ -41,13 +41,6 @@ export function getUserInfo() {
 }
 
 /**
- * 退出登录
- */
-export function logout() {
-  return http.get<void>('/auth/logout')
-}
-
-/**
  * 修改用户信息
  */
 export function updateInfo(data: IUpdateInfo) {
@@ -58,7 +51,7 @@ export function updateInfo(data: IUpdateInfo) {
  * 修改用户密码
  */
 export function updateUserPassword(data: IUpdatePassword) {
-  return http.post('/user/updatePassword', data)
+  return http.post('/user/update-password', data)
 }
 
 /**

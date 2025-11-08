@@ -65,41 +65,41 @@ function formatter(v, value) {
 </script>
 
 <template>
-  <view class="bg-app sticky z-100 px-24" :style="{ top: `${filterTop}px` }">
+  <view class="bg-app sticky z-100 px-24rpx" :style="{ top: `${filterTop}px` }">
     <view
-      class="radius-16 flex items-center justify-end gap-16 bg-blue-5 p-24 color-white"
+      class="flex items-center justify-end gap-16rpx rounded-[16rpx] bg-blue-5 p-24rpx color-white"
       @click="show = true"
     >
-      <view class="fs-26 flex flex-1 items-center gap-32">
+      <view class="flex flex-1 items-center gap-32rpx text-26rpx">
         <view>收入: {{ incomes }}</view>
         <view>支出: {{ expenses }}</view>
       </view>
       <wd-divider color="white" vertical />
-      <view class="flex items-center justify-end gap-14">
-        <view class="fs-32 fw-bold">
+      <view class="flex items-center justify-end gap-14rpx">
+        <view class="text-32rpx fw-bold">
           {{ getDate(time).getFullYear() }}
         </view>
-        <view class="fs-26">
+        <view class="text-26rpx">
           年
         </view>
-        <view class="fs-32 fw-bold">
+        <view class="text-32rpx fw-bold">
           {{ getDate(time).getMonth() + 1 }}
         </view>
-        <view class="fs-26">
+        <view class="text-26rpx">
           月
         </view>
-        <wd-icon custom-class="mr-12" name="filter1" size="18px" />
+        <wd-icon custom-class="mr-12rpx" name="filter1" size="18px" />
       </view>
     </view>
   </view>
 
   <!-- 选择日期 -->
   <wd-popup v-model="show" position="bottom" @close="handleCancel">
-    <view class="fs-28 flex items-center justify-between px-32 py-24 color-gray-5">
+    <view class="flex items-center justify-between px-32rpx py-24rpx text-28rpx color-gray-5">
       <view @click="handleCancel">
         取消
       </view>
-      <view class="fs-32 color-black fw-bold">
+      <view class="text-32rpx color-black fw-bold">
         日期
       </view>
       <view @click="handleChangeTime">

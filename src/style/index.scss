@@ -1,3 +1,5 @@
+@use './tabbar.scss';
+
 :root,
 page {
   font-family:
@@ -24,6 +26,42 @@ view {
 .wd-tabbar__placeholder {
   box-sizing: content-box;
   padding-bottom: calc(env(safe-area-inset-bottom) + 64rpx) !important;
+}
+
+.wd-popup-wrapper {
+  .wd-popup--bottom {
+    border-radius: 32rpx 32rpx 0 0;
+  }
+  .wd-overlay {
+    z-index: 100 !important;
+  }
+  .wd-popup {
+    z-index: 100 !important;
+  }
+}
+
+.wd-input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 18rpx;
+  &:focus,
+  &:focus-within {
+    border-color: #4299e1;
+  }
+  &::after {
+    content: unset !important;
+  }
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /*

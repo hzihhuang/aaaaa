@@ -99,7 +99,7 @@ export function http<T>(options: CustomRequestOptions) {
               title: responseData.msg || responseData.message || '请求错误',
             })
           }
-          return resolve(responseData.data as IResData<T>)
+          return resolve(responseData as IResData<T>)
         }
 
         // 处理其他错误

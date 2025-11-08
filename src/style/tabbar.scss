@@ -1,0 +1,65 @@
+uni-app > uni-tabbar {
+  display: none !important;
+}
+
+.wd-tabbar.wd-tabbar--round {
+  margin-bottom: 32rpx;
+}
+
+.wd-tabbar__placeholder {
+  box-sizing: content-box;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 64rpx) !important;
+}
+
+.wd-tabbar.accounting-tabbar {
+  .tabbar-item-add {
+    flex: unset;
+    width: 100rpx;
+    height: 100rpx;
+    color: white;
+    background-color: var(--wot-color-theme);
+    border-radius: 999px;
+    transform: translateY(-30%);
+    --wot-tabbar-inactive-color: white;
+  }
+}
+
+.add-tag-popup {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+
+  // 金额输入框
+  .wd-input.add-bills-dialog-input {
+    padding: 30rpx;
+
+    input {
+      font-size: 48rpx;
+      text-align: center;
+    }
+  }
+
+  // 标签
+  .tags {
+    gap: 24rpx 32rpx;
+    padding: 32rpx 0;
+    margin: 0 auto;
+
+    .tags-item {
+      &.active {
+        .tags-item-icon {
+          background-color: #4d80f0;
+
+          .tags-item-img {
+            filter: invert(1);
+          }
+        }
+
+        .tags-item-text {
+          color: #4d80f0;
+        }
+      }
+    }
+  }
+}

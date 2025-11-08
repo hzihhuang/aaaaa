@@ -1,14 +1,3 @@
-<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
-<route lang="json5" type="about">
-{
-  layout: 'tabbar',
-  style: {
-    navigationStyle: 'custom',
-    navigationBarTitleText: '统计',
-  },
-}
-</route>
-
 <script setup lang="ts">
 import Bubbles from '@/components/Bubbles.vue'
 import ChartBar from '@/components/ChartBar.vue'
@@ -17,6 +6,14 @@ import ChartPic from '@/components/ChartPic.vue'
 import Segmented from '@/components/Segmented.vue'
 import { TimeTypeEnum, TransactionTypeEnum } from '@/enums/global'
 import { getMonths, getWeeks, getYears } from './utils'
+
+definePage({
+  layout: 'tabbar',
+  style: {
+    navigationStyle: 'custom',
+    navigationBarTitleText: '统计',
+  },
+})
 
 const statusBarHeightRef = ref(0)
 onShow(() => {
@@ -53,11 +50,11 @@ watch(filterList, (v) => {
 
 <template>
   <view
-    class="page-header pb-24 pt-24"
+    class="page-header pb-24rpx pt-24rpx"
     :style="{ paddingTop: `${statusBarHeightRef === 0 ? '24rpx' : `${statusBarHeightRef}px`}` }"
   >
     <view>消费统计</view>
-    <view class="mt-30 flex gap-20 px-24">
+    <view class="mt-30rpx flex gap-20rpx px-24rpx">
       <Segmented
         v-model="type"
         class="flex-1"
@@ -76,34 +73,34 @@ watch(filterList, (v) => {
         ]"
       />
     </view>
-    <Bubbles v-model="bubbleType" class="mb-20 mt-40 px-24" :list="filterList" />
+    <Bubbles v-model="bubbleType" class="mb-20rpx mt-40rpx px-24rpx" :list="filterList" />
   </view>
-  <view class="flex flex-col gap-40 p-24">
+  <view class="flex flex-col gap-40rpx p-24rpx">
     <view class="chart-overview-card">
-      <view class="fs-28 opacity-90">
+      <view class="text-28rpx opacity-90">
         本周总支出
       </view>
-      <view class="fs-56 my-20 fw-600">
+      <view class="my-20rpx text-56rpx fw-600">
         ¥2,750
       </view>
-      <view class="fs-28 opacity-90">
+      <view class="text-28rpx opacity-90">
         较上周减少12.5%
       </view>
     </view>
     <view class="chart-card">
-      <view class="fs-32 mb-30 px-40 color-[#2D3748] fw-600">
+      <view class="mb-30rpx px-40rpx text-32rpx color-[#2D3748] fw-600">
         趋势分析
       </view>
       <ChartLine />
     </view>
     <view class="chart-card">
-      <view class="fs-32 mb-30 px-40 color-[#2D3748] fw-600">
+      <view class="mb-30rpx px-40rpx text-32rpx color-[#2D3748] fw-600">
         分类占比
       </view>
       <ChartPic />
     </view>
     <view class="chart-card">
-      <view class="fs-32 mb-30 px-40 color-[#2D3748] fw-600">
+      <view class="mb-30rpx px-40rpx text-32rpx color-[#2D3748] fw-600">
         金额排行
       </view>
       <ChartBar />

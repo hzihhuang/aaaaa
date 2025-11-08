@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BillInter } from '@/typings/bills'
+import type { BillInter } from '@/types/bills'
 
 const { date, list } = defineProps<{
   date: string
@@ -36,9 +36,9 @@ const [totalIncome, totalExpense] = computed(() => {
 
 <template>
   <wd-card custom-class="bill-card shadow-lg">
-    <view class="fs-24 flex items-center justify-between px-32 pb-20 pt-32 color-gray-4">
+    <view class="flex items-center justify-between px-32rpx pb-20rpx pt-32rpx text-24rpx color-gray-4">
       <view>{{ dateString }}</view>
-      <view class="flex items-center gap-24">
+      <view class="flex items-center gap-24rpx">
         <view v-show="totalIncome > 0">
           收入: {{ totalIncome }}
         </view>
@@ -49,26 +49,26 @@ const [totalIncome, totalExpense] = computed(() => {
     </view>
     <wd-swipe-action v-for="item in list" :key="item.id">
       <view
-        class="bill-item relative flex items-center justify-between px-32 py-16 active:bg-gray-1"
+        class="bill-item relative flex items-center justify-between px-32rpx py-16rpx active:bg-gray-1"
         @click="emits('detail', item.id)"
       >
         <view
-          class="mr-24 h-64 w-64 flex items-center justify-center overflow-hidden rounded-full bg-gray-1 p-12"
+          class="mr-24rpx h-64rpx w-64rpx flex items-center justify-center overflow-hidden rounded-full bg-gray-1 p-12rpx"
         >
           <image :src="item.category.img" class="h-full w-full" />
         </view>
         <view class="bill-item-right flex flex-1 items-center justify-between color-gray-5">
-          <view class="fs-24">
+          <view class="text-24rpx">
             {{ item.remark ?? item.category.name }}
           </view>
-          <view class="fs-28">
+          <view class="text-28rpx">
             {{ item.price }}
           </view>
         </view>
       </view>
       <template #right>
         <view
-          class="fs-28 ml-1 h-full w-120 flex items-center justify-center bg-red-5 color-white"
+          class="œlex mr-4rpx h-full w-120rpx items-center justify-center rounded-[16rpx] bg-red-5 text-28rpx color-white"
           @click="emits('delete', item.id)"
         >
           删除
@@ -77,3 +77,13 @@ const [totalIncome, totalExpense] = computed(() => {
     </wd-swipe-action>
   </wd-card>
 </template>
+
+<style lang="scss" scoped>
+.wd-card.wd-card.bill-card {
+  padding: 0 0 12rpx;
+  margin: 32rpx 24rpx;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+}
+</style>

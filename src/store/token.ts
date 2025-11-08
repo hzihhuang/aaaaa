@@ -6,13 +6,13 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue' // 修复：导入 computed
 import {
   login as _login,
-  logout as _logout,
   refreshToken as _refreshToken,
   wxLogin as _wxLogin,
   getWxCode,
 } from '@/api/login'
 import { isDoubleTokenRes, isSingleTokenRes } from '@/api/types/login'
 import { isDoubleTokenMode } from '@/utils'
+import { showToast } from '@/utils/globalToast'
 import { useUserStore } from './user'
 
 // 初始化状态
@@ -31,12 +31,9 @@ const tokenInfoState = isDoubleTokenMode
 export const useTokenStore = defineStore(
   'token',
   () => {
-    // 定义用户信息
     const tokenInfo = ref<IAuthLoginRes>({ ...tokenInfoState })
-    // 设置用户信息
     const setTokenInfo = (val: IAuthLoginRes) => {
       tokenInfo.value = val
-
       // 计算并存储过期时间
       const now = Date.now()
       if (isSingleTokenRes(val)) {
@@ -104,20 +101,13 @@ export const useTokenStore = defineStore(
     const login = async (loginForm: ILoginForm) => {
       try {
         const res = await _login(loginForm)
-        console.log('普通登录-res: ', res)
-        await _postLogin(res)
-        uni.showToast({
-          title: '登录成功',
-          icon: 'success',
-        })
+        await _postLogin(res.data)
+        showToast().success('登录成功')
         return res
       }
       catch (error) {
         console.error('登录失败:', error)
-        uni.showToast({
-          title: '登录失败，请重试',
-          icon: 'error',
-        })
+        showToast().error('登录失败，请重试')
         throw error
       }
     }
@@ -156,24 +146,15 @@ export const useTokenStore = defineStore(
      * 退出登录 并 删除用户信息
      */
     const logout = async () => {
-      try {
-        // TODO 实现自己的退出登录逻辑
-        await _logout()
-      }
-      catch (error) {
-        console.error('退出登录失败:', error)
-      }
-      finally {
-        // 无论成功失败，都需要清除本地token信息
-        // 清除存储的过期时间
-        uni.removeStorageSync('accessTokenExpireTime')
-        uni.removeStorageSync('refreshTokenExpireTime')
-        console.log('退出登录-清除用户信息')
-        tokenInfo.value = { ...tokenInfoState }
-        uni.removeStorageSync('token')
-        const userStore = useUserStore()
-        userStore.clearUserInfo()
-      }
+      uni.removeStorageSync('accessTokenExpireTime')
+      uni.removeStorageSync('refreshTokenExpireTime')
+      tokenInfo.value = { ...tokenInfoState }
+      uni.removeStorageSync('token')
+      const userStore = useUserStore()
+      userStore.clearUserInfo()
+      uni.navigateTo({
+        url: '/pages-fg/login',
+      })
     }
 
     /**

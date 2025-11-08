@@ -14,12 +14,8 @@ export type CustomTabBarItemBadge = number | 'dot'
 /** 自定义 tabbar 的单个选项配置 */
 export interface CustomTabBarItem {
   name?: string
-  text: string
-  pagePath: RemoveLeadingSlashFromUnion<_LocationUrl>
-  icon: string
-  iconActive?: string
-  /** badge 显示一个数字或 小红点 */
-  badge?: CustomTabBarItemBadge
+  text?: string
+  pagePath?: RemoveLeadingSlashFromUnion<_LocationUrl>
   /** 是否是中间的鼓包tabbarItem */
   isBulge?: boolean
 }

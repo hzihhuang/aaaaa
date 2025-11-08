@@ -1,4 +1,4 @@
-import { formatTime } from '@/utils/fun'
+import { formatTime } from '@/utils/time-funs'
 
 export function getWeeks() {
   // 获取今年开始到现在所有周 [本周，上周，第x周,第x-1周]

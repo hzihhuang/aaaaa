@@ -1,20 +1,17 @@
-<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
-<route lang="json5" type="about">
-{
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useTokenStore, useUserStore } from '@/store'
+import { showToast } from '@/utils/globalToast'
+
+definePage({
   layout: 'tabbar',
   style: {
     navigationStyle: 'custom',
     navigationBarTitleText: '我的',
   },
-}
-</route>
+})
 
-<script lang="ts" setup>
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store'
-import { showToast } from '@/utils/globalToast'
-
-const { clearUserInfo } = useUserStore()
+const { logout } = useTokenStore()
 const { userInfo } = storeToRefs(useUserStore())
 
 const statusBarHeightRef = ref(0)
@@ -26,7 +23,7 @@ onShow(() => {
 })
 
 function handleLogout() {
-  clearUserInfo()
+  logout()
   showToast().info('已退出登录')
 }
 </script>

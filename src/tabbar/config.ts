@@ -28,7 +28,7 @@ export const nativeTabbarList: NativeTabBarItem[] = [
   {
     iconPath: 'static/tabbar/home.png',
     selectedIconPath: 'static/tabbar/homeHL.png',
-    pagePath: 'pages/index/index',
+    pagePath: 'pages/home/index',
     text: '首页',
   },
   {
@@ -45,24 +45,26 @@ export const customTabbarList: CustomTabBarItem[] = [
   {
     text: '首页',
     name: 'home',
-    pagePath: 'pages/index/index',
-    icon: 'i-carbon-home',
+    pagePath: 'pages/home/index',
+  },
+  {
+    text: '图表',
+    name: 'chart',
+    pagePath: 'pages/chart/index',
+  },
+  {
+    name: 'add',
+    isBulge: true,
+  },
+  {
+    text: '账单',
+    name: 'list',
+    pagePath: 'pages/bills/index',
   },
   {
     text: '我的',
-    name: 'my',
+    name: 'user',
     pagePath: 'pages/my/index',
-    icon: 'i-carbon-user',
-  },
-  {
-    text: '我的',
-    pagePath: 'pages/my/index',
-    icon: 'i-carbon-user',
-  },
-  {
-    text: '我的',
-    pagePath: 'pages/my/index',
-    icon: 'i-carbon-user',
   },
 ]
 

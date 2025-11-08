@@ -1,8 +1,8 @@
-import type { CustomTabBarItem, CustomTabBarItemBadge } from './types'
+import type { CustomTabBarItem } from './types'
 import { reactive } from 'vue'
 
 import { isNeedLoginMode } from '@/router/config'
-import { FG_LOG_ENABLE, judgeIsExcludePath } from '@/router/interceptor'
+import { judgeIsExcludePath } from '@/router/interceptor'
 import { useTokenStore } from '@/store/token'
 import { tabbarList as _tabbarList, customTabbarEnable, selectedTabbarStrategy, TABBAR_STRATEGY_MAP } from './config'
 
@@ -12,7 +12,7 @@ const BULGE_ENABLE = false
 /** tabbarList 里面的 path 从 pages.config.ts 得到 */
 const tabbarList = reactive<CustomTabBarItem[]>(_tabbarList.map(item => ({
   ...item,
-  pagePath: item.pagePath.startsWith('/') ? item.pagePath : `/${item.pagePath}`,
+  pagePath: item?.pagePath?.startsWith?.('/') ? item?.pagePath : `/${item.pagePath}`,
 })))
 
 if (customTabbarEnable && BULGE_ENABLE) {
@@ -48,11 +48,6 @@ const tabbarStore = reactive({
       uni.setStorageSync('app-tabbar-index', idx)
     }
   },
-  setTabbarItemBadge(idx: number, badge: CustomTabBarItemBadge) {
-    if (tabbarList[idx]) {
-      tabbarList[idx].badge = badge
-    }
-  },
   setAutoCurIdx(path: string) {
     // '/' 当做首页
     if (path === '/') {
@@ -60,8 +55,6 @@ const tabbarStore = reactive({
       return
     }
     const index = tabbarList.findIndex(item => item.pagePath === path)
-    FG_LOG_ENABLE && console.log('index:', index, path)
-    // console.log('tabbarList:', tabbarList)
     if (index === -1) {
       const pagesPathList = getCurrentPages().map(item => item.route.startsWith('/') ? item.route : `/${item.route}`)
       // console.log(pagesPathList)

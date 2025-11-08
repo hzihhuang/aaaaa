@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import Segmented from '@/components/Segmented.vue'
 import { formatTime, isSameDay } from '@/utils/time-funs'
-import Segmented from '../Segmented.vue'
-import { IAccountingTypeEnum, useAddBill, useBillDate } from './hook'
+import { IAccountingTypeEnum, useAddBill } from '../hooks/useAddBill'
+import { useBillDate } from '../hooks/useBillDate'
 
 const list = [
   {
@@ -78,7 +79,7 @@ const { DEFAULT_DATE, billDate, cacheDate, showDate, handleDateChange } = useBil
           >
             <image class="h-full w-full" :src="i.img" />
           </view>
-          <view class="tags-item-text fs-28 color-gray-5">
+          <view class="tags-item-text text-28rpx color-gray-5">
             {{ i.name }}
           </view>
         </view>
